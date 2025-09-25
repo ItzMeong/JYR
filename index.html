@@ -42,6 +42,64 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
+
+        /* Navigation and Button Animations */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00f7ff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: #00f7ff;
+            text-shadow: 0 0 12px rgba(0, 247, 255, 0.6);
+        }
+
+        .nav-link:active {
+            transform: scale(0.95);
+            color: #00ccff;
+            text-shadow: 0 0 16px rgba(0, 204, 255, 0.8);
+        }
+
+        .nav-link.active {
+            color: #00f7ff;
+            text-shadow: 0 0 12px rgba(0, 247, 255, 0.6);
+        }
+
+        .nav-link.active::before {
+            width: 100%;
+        }
+
+        .contact-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #00f7ff;
+            transform: translateY(-2px);
+            text-shadow: 0 0 12px rgba(0, 247, 255, 0.6);
+        }
+
+        .contact-link:active {
+            transform: translateY(0) scale(0.95);
+            color: #00ccff;
+            text-shadow: 0 0 16px rgba(0, 204, 255, 0.8);
+        }
         
         /* Futuristic Background Animations */
         .bg-animated {
@@ -317,7 +375,12 @@
                     </div>
                     <h1 class="text-3xl font-bold futuristic-font neon-glow">JYR STORE</h1>
                 </div>
-                <div class="hidden md:flex items-center space-x-6">
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#paket" class="text-white nav-link futuristic-font">PAKET</a>
+                    <a href="#pemesanan" class="text-white nav-link futuristic-font">PEMESANAN</a>
+                    <a href="#contact" class="text-white nav-link futuristic-font">CONTACT US</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-6 ml-8">
                     <span class="flex items-center space-x-2 futuristic-font">
                         <span class="w-3 h-3 bg-red-400 rounded-full pulse-animation red-glow"></span>
                         <span class="neon-glow">ONLINE 24/7</span>
@@ -345,7 +408,7 @@
     </section>
 
     <!-- Platform Cards -->
-    <section class="py-20 bg-black relative z-10">
+    <section class="py-20 bg-black relative z-10" id="paket">
         <div class="container mx-auto px-4">
             <h3 class="text-4xl font-bold text-center text-white mb-16 futuristic-font neon-glow">PLATFORM TERSEDIA</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -405,7 +468,7 @@
     </section>
 
     <!-- Order Form -->
-    <section class="py-20 bg-gray-900 relative z-10 bg-animated" id="order-form">
+    <section class="py-20 bg-gray-900 relative z-10 bg-animated" id="pemesanan">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto">
                 <div class="dark-card rounded-2xl shadow-2xl p-10 border border-red-600 red-glow">
@@ -572,6 +635,32 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section class="py-20 bg-gray-900 relative z-10 bg-animated" id="contact">
+        <div class="container mx-auto px-4">
+            <h3 class="text-4xl font-bold text-center text-white mb-16 futuristic-font neon-glow">HUBUNGI KAMI</h3>
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="mb-8">
+                    <p class="text-xl text-gray-300 mb-6">Butuh bantuan atau ada pertanyaan? Hubungi kami melalui:</p>
+                    <div class="flex flex-col space-y-4 items-center justify-center">
+                        <a href="https://wa.me/your-number" class="flex items-center space-x-3 text-white contact-link">
+                            <span class="text-2xl">📱</span>
+                            <span class="text-xl futuristic-font">WhatsApp</span>
+                        </a>
+                        <a href="https://t.me/your-username" class="flex items-center space-x-3 text-white contact-link">
+                            <span class="text-2xl">✈️</span>
+                            <span class="text-xl futuristic-font">Telegram</span>
+                        </a>
+                        <a href="mailto:your-email@example.com" class="flex items-center space-x-3 text-white contact-link">
+                            <span class="text-2xl">📧</span>
+                            <span class="text-xl futuristic-font">Email</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12 relative z-10 border-t border-red-600">
         <div class="container mx-auto px-4 text-center">
@@ -715,6 +804,44 @@ document.getElementById("orderForm").addEventListener("submit", function(e) {
     .catch(error => {
         alert("❌ Terjadi kesalahan, coba lagi.");
         console.error(error);
+    });
+});
+
+// Smooth Scrolling for Navigation
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // Add click event listener to each link
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default jump
+            
+            // Get the target section id from href
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                // Remove active class from all links and add to clicked one
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Get the header height for offset
+                const headerHeight = document.querySelector('header').offsetHeight;
+                
+                // Calculate the target position with offset
+                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                // Smooth scroll to target
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update URL without jumping
+                window.history.pushState(null, '', `#${targetId}`);
+            }
+        });
     });
 });
 </script>
