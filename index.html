@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Account Store - Futuristic Digital Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: transparent;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            zoom: 0.7;
+            transform-origin: top left;
+        }
+        
+        .futuristic-font {
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 50%, #B22222 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-hover {
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(220, 20, 60, 0.3);
+            border: 1px solid rgba(220, 20, 60, 0.5);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Enhanced Page Navigation with Smooth Transitions */
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(100px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1;
+        }
+        
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0) scale(1);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .page.slide-out-left {
+            transform: translateX(-100px) scale(0.95);
+            opacity: 0;
+        }
+        
+        .page.slide-in-right {
+            transform: translateX(100px) scale(0.95);
+            opacity: 0;
+        }
+        
+        /* Page transition effects */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(220, 20, 60, 0.9), rgba(139, 0, 0, 0.9));
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .page-transition.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .transition-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .transition-loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: transitionSpin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes transitionSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Staggered content animation */
+        .stagger-animation > * {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: staggerIn 0.6s ease-out forwards;
+        }
+        
+        .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+        .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+        .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+        .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+        .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes staggerIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Navigation Styles */
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: #DC143C;
+            text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+        }
+        
+        .nav-link.active {
+            color: #DC143C;
+            text-shadow: 0 0 10px rgba(220, 20, 60, 0.8);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #DC143C, transparent);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        /* Futuristic Background Animations */
+        .bg-animated {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bg-animated::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(220, 20, 60, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(178, 34, 34, 0.05) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            25% { transform: translateX(-20px) translateY(-20px) rotate(1deg); }
+            50% { transform: translateX(20px) translateY(20px) rotate(-1deg); }
+            75% { transform: translateX(-10px) translateY(10px) rotate(0.5deg); }
+        }
+        
+        /* Enhanced Floating Particles */
+        .particle {
+            position: absolute;
+            background: rgba(220, 20, 60, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(220, 20, 60, 0.8);
+        }
+        
+        .particle-1 { width: 4px; height: 4px; top: 20%; left: 10%; animation: float1 15s infinite linear; }
+        .particle-2 { width: 6px; height: 6px; top: 60%; left: 80%; animation: float2 20s infinite linear; }
+        .particle-3 { width: 3px; height: 3px; top: 80%; left: 30%; animation: float3 18s infinite linear; }
+        .particle-4 { width: 5px; height: 5px; top: 40%; left: 70%; animation: float4 22s infinite linear; }
+        .particle-5 { width: 2px; height: 2px; top: 10%; left: 50%; animation: float5 16s infinite linear; }
+        .particle-6 { width: 4px; height: 4px; top: 70%; left: 15%; animation: float6 19s infinite linear; }
+        .particle-7 { width: 3px; height: 3px; top: 30%; left: 85%; animation: float7 17s infinite linear; }
+        .particle-8 { width: 5px; height: 5px; top: 15%; left: 75%; animation: float8 14s infinite linear; }
+        .particle-9 { width: 3px; height: 3px; top: 55%; left: 25%; animation: float9 21s infinite linear; }
+        .particle-10 { width: 4px; height: 4px; top: 85%; left: 60%; animation: float10 18s infinite linear; }
+        
+        /* Geometric Shapes */
+        .geo-shape {
+            position: absolute;
+            border: 2px solid rgba(220, 20, 60, 0.3);
+            pointer-events: none;
+        }
+        
+        .geo-triangle {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid rgba(220, 20, 60, 0.2);
+            top: 25%; left: 15%;
+            animation: rotateShape 20s infinite linear;
+        }
+        
+        .geo-square {
+            width: 20px;
+            height: 20px;
+            background: rgba(220, 20, 60, 0.1);
+            border: 2px solid rgba(220, 20, 60, 0.4);
+            top: 65%; left: 85%;
+            animation: floatShape 15s infinite ease-in-out;
+        }
+        
+        .geo-diamond {
+            width: 15px;
+            height: 15px;
+            background: rgba(220, 20, 60, 0.2);
+            transform: rotate(45deg);
+            top: 45%; left: 90%;
+            animation: pulseDiamond 8s infinite ease-in-out;
+        }
+        
+        .geo-hexagon {
+            width: 20px;
+            height: 11.55px;
+            background: rgba(220, 20, 60, 0.15);
+            position: relative;
+            top: 35%; left: 5%;
+            animation: hexagonFloat 12s infinite ease-in-out;
+        }
+        
+        .geo-hexagon:before,
+        .geo-hexagon:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+        }
+        
+        .geo-hexagon:before {
+            bottom: 100%;
+            border-bottom: 5.77px solid rgba(220, 20, 60, 0.15);
+        }
+        
+        .geo-hexagon:after {
+            top: 100%;
+            border-top: 5.77px solid rgba(220, 20, 60, 0.15);
+        }
+        
+        @keyframes float1 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes float2 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(-30px) rotate(-360deg); opacity: 0; }
+        }
+        
+        @keyframes float3 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(80px) rotate(180deg); opacity: 0; }
+        }
+        
+        @keyframes float4 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(-60px) rotate(-180deg); opacity: 0; }
+        }
+        
+        @keyframes float5 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(20px) rotate(270deg); opacity: 0; }
+        }
+        
+        @keyframes float6 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(-40px) rotate(450deg); opacity: 0; }
+        }
+        
+        @keyframes float7 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(70px) rotate(-270deg); opacity: 0; }
+        }
+        
+        @keyframes float8 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(-25px) rotate(540deg); opacity: 0; }
+        }
+        
+        @keyframes float9 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(45px) rotate(-450deg); opacity: 0; }
+        }
+        
+        @keyframes float10 {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(-35px) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Geometric Shape Animations */
+        @keyframes rotateShape {
+            0% { transform: rotate(0deg) scale(1); opacity: 0.3; }
+            25% { opacity: 0.8; }
+            50% { transform: rotate(180deg) scale(1.2); opacity: 0.6; }
+            75% { opacity: 0.9; }
+            100% { transform: rotate(360deg) scale(1); opacity: 0.3; }
+        }
+        
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.4; }
+            25% { transform: translateY(-20px) rotate(90deg); opacity: 0.8; }
+            50% { transform: translateY(-10px) rotate(180deg); opacity: 0.6; }
+            75% { transform: translateY(-30px) rotate(270deg); opacity: 0.9; }
+        }
+        
+        @keyframes pulseDiamond {
+            0%, 100% { transform: rotate(45deg) scale(1); opacity: 0.3; box-shadow: 0 0 5px rgba(220, 20, 60, 0.3); }
+            50% { transform: rotate(225deg) scale(1.5); opacity: 0.8; box-shadow: 0 0 20px rgba(220, 20, 60, 0.8); }
+        }
+        
+        @keyframes hexagonFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.4; }
+            33% { transform: translateY(-15px) rotate(120deg); opacity: 0.7; }
+            66% { transform: translateY(-25px) rotate(240deg); opacity: 0.9; }
+        }
+        
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            color: rgba(220, 20, 60, 0.6);
+            font-family: 'Orbitron', monospace;
+            font-size: 14px;
+            line-height: 20px;
+            animation: matrixFall linear infinite;
+        }
+        
+        @keyframes matrixFall {
+            0% { top: -100%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        
+        /* Energy Waves */
+        .energy-wave {
+            position: absolute;
+            border: 2px solid rgba(220, 20, 60, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .wave-1 {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation: energyPulse 4s infinite ease-in-out;
+        }
+        
+        .wave-2 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            animation: energyPulse 6s infinite ease-in-out 2s;
+        }
+        
+        .wave-3 {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 50%;
+            animation: energyPulse 5s infinite ease-in-out 1s;
+        }
+        
+        @keyframes energyPulse {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0;
+                border-color: rgba(220, 20, 60, 0.1);
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.8;
+                border-color: rgba(220, 20, 60, 0.8);
+                box-shadow: 0 0 30px rgba(220, 20, 60, 0.5);
+            }
+        }
+        
+        /* Scanning Lines */
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.8), transparent);
+            animation: scanMove 8s infinite linear;
+        }
+        
+        .scan-line-1 { animation-delay: 0s; }
+        .scan-line-2 { animation-delay: 4s; }
+        
+        @keyframes scanMove {
+            0% { top: -2px; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        
+        /* Enhanced Glowing Lines */
+        .glow-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.8), transparent);
+            animation: moveLine 8s infinite linear;
+        }
+        
+        .glow-line-1 { top: 25%; width: 200px; left: -200px; animation-delay: 0s; }
+        .glow-line-2 { top: 65%; width: 150px; left: -150px; animation-delay: 3s; }
+        .glow-line-3 { top: 45%; width: 180px; left: -180px; animation-delay: 6s; }
+        .glow-line-4 { top: 85%; width: 120px; left: -120px; animation-delay: 2s; }
+        .glow-line-5 { top: 15%; width: 160px; left: -160px; animation-delay: 5s; }
+        
+        @keyframes moveLine {
+            0% { left: -200px; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100vw; opacity: 0; }
+        }
+        
+        /* Enhanced Circuit Lines */
+        .circuit {
+            position: absolute;
+            width: 2px;
+            background: rgba(220, 20, 60, 0.3);
+            animation: circuitPulse 4s infinite ease-in-out;
+        }
+        
+        .circuit-1 { height: 100px; top: 30%; left: 20%; animation-delay: 0s; }
+        .circuit-2 { height: 80px; top: 60%; left: 75%; animation-delay: 1s; }
+        .circuit-3 { height: 120px; top: 10%; left: 60%; animation-delay: 2s; }
+        .circuit-4 { height: 90px; top: 80%; left: 40%; animation-delay: 1.5s; }
+        
+        @keyframes circuitPulse {
+            0%, 100% { opacity: 0.3; box-shadow: 0 0 5px rgba(220, 20, 60, 0.3); }
+            50% { opacity: 1; box-shadow: 0 0 20px rgba(220, 20, 60, 0.8); }
+        }
+        
+        /* Dark theme components */
+        .dark-card {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(220, 20, 60, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .dark-input {
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(220, 20, 60, 0.3);
+            color: #ffffff;
+        }
+        
+        .dark-input:focus {
+            border-color: rgba(220, 20, 60, 0.8);
+            box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
+        }
+        
+        .neon-glow {
+            text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+        }
+        
+        .red-glow {
+            box-shadow: 0 0 30px rgba(220, 20, 60, 0.4);
+        }
+        
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: fabPulse 3s infinite;
+        }
+        
+        @keyframes fabPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(220, 20, 60, 0.3);
+            border-radius: 50%;
+            border-top-color: #DC143C;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Testimonial Slider */
+        .testimonial-slider {
+            overflow: hidden;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+        
+        /* Counter Animation */
+        .counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #DC143C;
+        }
+        
+        /* FAQ Accordion */
+        .faq-item {
+            border-bottom: 1px solid rgba(220, 20, 60, 0.2);
+        }
+        
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-content.open {
+            max-height: 200px;
+        }
+        
+        /* Chat Bubble */
+        .chat-bubble {
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* JYR Animated Text */
+        .jyr-text {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            font-size: 20vw;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            color: transparent;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(220, 20, 60, 0.1) 20%, 
+                rgba(220, 20, 60, 0.8) 50%, 
+                rgba(255, 255, 255, 1) 60%, 
+                rgba(220, 20, 60, 0.8) 70%, 
+                rgba(220, 20, 60, 0.1) 80%, 
+                transparent 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            text-shadow: 
+                0 0 20px rgba(220, 20, 60, 0.8),
+                0 0 40px rgba(220, 20, 60, 0.6),
+                0 0 60px rgba(220, 20, 60, 0.4),
+                0 0 80px rgba(220, 20, 60, 0.2);
+            animation: jyrGlow 8s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 1;
+            white-space: nowrap;
+            letter-spacing: 0.2em;;
+        }
+        
+        @keyframes jyrGlow {
+            from { 
+                transform: translateY(-50%) translateX(calc(-100% - 100vw));
+    }
+            to { 
+                transform: translateY(-50%) translateX(calc(100vw + 100%));
+                text-shadow: 
+                    0 0 30px rgba(220, 20, 60, 1),
+                    0 0 60px rgba(220, 20, 60, 0.8),
+                    0 0 90px rgba(220, 20, 60, 0.6),
+                    0 0 120px rgba(220, 20, 60, 0.4);
+            }
+        }
+
+
+
+        /* Custom Pop-up Modal */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-content {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(40, 40, 40, 0.95));
+            border: 2px solid #DC143C;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.7) translateY(50px);
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px rgba(220, 20, 60, 0.3);
+        }
+        
+        .popup-overlay.show .popup-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        .popup-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #DC143C, #B22222);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            animation: popupPulse 2s infinite;
+        }
+        
+        @keyframes popupPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(220, 20, 60, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(220, 20, 60, 0.8); }
+        }
+        
+        .popup-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #DC143C;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+        }
+        
+        .popup-message {
+            font-size: 16px;
+            color: #ffffff;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .popup-close-btn {
+            background: linear-gradient(135deg, #DC143C, #B22222);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .popup-close-btn:hover {
+            background: linear-gradient(135deg, #B22222, #8B0000);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(220, 20, 60, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0" style="z-index: -1;">
+        <!-- Enhanced Floating Particles -->
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+        <div class="particle particle-5"></div>
+        <div class="particle particle-6"></div>
+        <div class="particle particle-7"></div>
+        <div class="particle particle-8"></div>
+        <div class="particle particle-9"></div>
+        <div class="particle particle-10"></div>
+        
+        <!-- Geometric Shapes -->
+        <div class="geo-triangle"></div>
+        <div class="geo-square"></div>
+        <div class="geo-diamond"></div>
+        <div class="geo-hexagon"></div>
+        
+        <!-- Energy Waves -->
+        <div class="energy-wave wave-1"></div>
+        <div class="energy-wave wave-2"></div>
+        <div class="energy-wave wave-3"></div>
+        
+        <!-- Scanning Lines -->
+        <div class="scan-line scan-line-1"></div>
+        <div class="scan-line scan-line-2"></div>
+        
+        <!-- Matrix Rain Effect -->
+        <div class="matrix-rain" id="matrixRain"></div>
+        
+        <!-- Enhanced Glowing Lines -->
+        <div class="glow-line glow-line-1"></div>
+        <div class="glow-line glow-line-2"></div>
+        <div class="glow-line glow-line-3"></div>
+        <div class="glow-line glow-line-4"></div>
+        <div class="glow-line glow-line-5"></div>
+        
+        <!-- Enhanced Circuit Lines -->
+        <div class="circuit circuit-1"></div>
+        <div class="circuit circuit-2"></div>
+        <div class="circuit circuit-3"></div>
+        <div class="circuit circuit-4"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-90 backdrop-blur-lg border-b border-red-600">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center red-glow">
+                        <span class="text-xl">🔥</span>
+                    </div>
+                    <span class="text-xl font-bold futuristic-font neon-glow">JYR PREMIUM STORE</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-link futuristic-font active" data-page="home">HOME</a>
+                    <a href="#" class="nav-link futuristic-font" data-page="products">PRODUCTS</a>
+                    <a href="#" class="nav-link futuristic-font" data-page="order">ORDER</a>
+                    <a href="#" class="nav-link futuristic-font" data-page="contact">CONTACT</a>
+                    <a href="#" class="nav-link futuristic-font" data-page="support">SUPPORT</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu fixed top-16 left-0 w-full h-screen bg-black bg-opacity-95 backdrop-blur-lg md:hidden" id="mobile-menu">
+            <div class="flex flex-col items-center justify-center h-full space-y-8">
+                <a href="#" class="nav-link futuristic-font text-2xl active" data-page="home">HOME</a>
+                <a href="#" class="nav-link futuristic-font text-2xl" data-page="products">PRODUCTS</a>
+                <a href="#" class="nav-link futuristic-font text-2xl" data-page="order">ORDER</a>
+                <a href="#" class="nav-link futuristic-font text-2xl" data-page="contact">CONTACT</a>
+                <a href="#" class="nav-link futuristic-font text-2xl" data-page="support">SUPPORT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Transition Overlay -->
+    <div id="pageTransition" class="page-transition">
+        <div class="transition-content">
+            <div class="transition-loader"></div>
+            <div class="text-2xl font-bold futuristic-font neon-glow" id="transitionText">LOADING...</div>
+        </div>
+    </div>
+
+    <!-- Custom Success Pop-up -->
+    <div id="successPopup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-icon">
+                ✅
+            </div>
+            <div class="popup-title futuristic-font">BERHASIL TERKIRIM!</div>
+            <div class="popup-message" id="popupMessage">
+                Data Anda telah berhasil disimpan ke Google Sheets dan akan segera diproses oleh tim kami.
+            </div>
+            <button class="popup-close-btn futuristic-font" onclick="closePopup()">TUTUP</button>
+        </div>
+    </div>
+
+    <!-- Custom Error Pop-up -->
+    <div id="errorPopup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-icon" style="background: linear-gradient(135deg, #DC2626, #991B1B);">
+                ❌
+            </div>
+            <div class="popup-title futuristic-font">TERJADI KESALAHAN!</div>
+            <div class="popup-message" id="errorPopupMessage">
+                Terjadi kesalahan saat menyimpan data. Silakan coba lagi atau hubungi customer service.
+            </div>
+            <button class="popup-close-btn futuristic-font" onclick="closeErrorPopup()">TUTUP</button>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="fab">
+        <button class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-800 rounded-full flex items-center justify-center text-white text-2xl red-glow hover:from-red-500 hover:to-red-700 transition-all duration-300" onclick="scrollToTop()">
+            ↑
+        </button>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="pt-24 pb-20 bg-transparent bg-animated min-h-screen flex items-center relative z-10">
+            <!-- JYR Animated Text -->
+            <div class="jyr-text">JYR</div>
+            
+            <div class="container mx-auto px-4 text-center stagger-animation">
+                <h1 class="text-6xl md:text-8xl font-bold text-white mb-8 futuristic-font" style="text-shadow: 0 0 20px rgba(220, 20, 60, 0.8), 0 0 40px rgba(220, 20, 60, 0.6), 0 0 60px rgba(220, 20, 60, 0.4);">
+                    FUTURE IS <span class="text-red-400" style="text-shadow: 0 0 30px rgba(220, 20, 60, 1), 0 0 50px rgba(220, 20, 60, 0.8);">NOW</span>
+                </h1>
+                <p class="text-2xl text-gray-200 mb-12 max-w-4xl mx-auto leading-relaxed">
+                    Masuki era digital masa depan dengan akses premium ke semua platform entertainment terbaik dunia
+                </p>
+                <div class="flex flex-wrap justify-center gap-6 mb-12">
+                    <div class="bg-gradient-to-r from-red-900 to-red-700 px-8 py-4 rounded-full futuristic-font red-glow border border-red-600">
+                        <span class="counter" data-target="10000">0</span>
+                        <div class="text-sm text-red-200">HAPPY CUSTOMERS</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-red-900 to-red-700 px-8 py-4 rounded-full futuristic-font red-glow border border-red-600">
+                        <span class="counter" data-target="50">0</span>
+                        <div class="text-sm text-red-200">PLATFORMS</div>
+                    </div>
+                    <div class="bg-gradient-to-r from-red-900 to-red-700 px-8 py-4 rounded-full futuristic-font red-glow border border-red-600">
+                        <span class="counter" data-target="3000">0</span>
+                        <div class="text-sm text-red-200">ORDERS PER MONTH</div>
+                    </div>
+                </div>
+                <button class="bg-gradient-to-r from-red-700 to-red-900 text-white py-6 px-12 rounded-lg font-semibold text-xl hover:from-red-600 hover:to-red-800 transition duration-300 transform hover:scale-105 futuristic-font neon-glow red-glow border border-red-600" onclick="navigateToPage('products')">
+                    🚀 EXPLORE PRODUCTS
+                </button>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-20 bg-transparent relative">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-white mb-16 futuristic-font neon-glow">WHY CHOOSE US?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="text-center dark-card p-8 rounded-xl card-hover">
+                        <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-6 red-glow">
+                            <span class="text-3xl">🛡️</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white futuristic-font">SECURE & GUARANTEED</h3>
+                        <p class="text-gray-400 text-lg">Advanced encryption and 30-day money-back guarantee</p>
+                    </div>
+                    <div class="text-center dark-card p-8 rounded-xl card-hover">
+                        <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-6 red-glow">
+                            <span class="text-3xl">⚡</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white futuristic-font">INSTANT DELIVERY</h3>
+                        <p class="text-gray-400 text-lg">Get your premium accounts within 1 hour</p>
+                    </div>
+                    <div class="text-center dark-card p-8 rounded-xl card-hover">
+                        <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-6 red-glow">
+                            <span class="text-3xl">🌐</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white futuristic-font">24/7 SUPPORT</h3>
+                        <p class="text-gray-400 text-lg">Round-the-clock customer service and technical support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-20 bg-transparent relative">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-white mb-16 futuristic-font neon-glow">CUSTOMER TESTIMONIALS</h2>
+                <div class="testimonial-slider max-w-4xl mx-auto">
+                    <div class="testimonial-track" id="testimonial-track">
+                        <div class="testimonial-slide">
+                            <div class="dark-card p-8 rounded-xl text-center">
+                                <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
+                                <p class="text-xl text-gray-300 mb-6 italic">"Pelayanan luar biasa! Akun Netflix premium saya sudah berjalan 6 bulan tanpa masalah."</p>
+                                <div class="text-red-400 futuristic-font font-semibold">- ANDI PRATAMA</div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="dark-card p-8 rounded-xl text-center">
+                                <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
+                                <p class="text-xl text-gray-300 mb-6 italic">"Harga terjangkau dengan kualitas premium. Spotify saya lancar jaya!"</p>
+                                <div class="text-red-400 futuristic-font font-semibold">- SARI DEWI</div>
+                            </div>
+                        </div>
+                        <div class="testimonial-slide">
+                            <div class="dark-card p-8 rounded-xl text-center">
+                                <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
+                                <p class="text-xl text-gray-300 mb-6 italic">"Support 24/7 benar-benar responsif. Recommended banget!"</p>
+                                <div class="text-red-400 futuristic-font font-semibold">- BUDI SANTOSO</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PRODUCTS PAGE -->
+    <div id="products" class="page">
+        <section class="pt-24 pb-20 bg-transparent bg-animated">
+            <div class="container mx-auto px-4 stagger-animation">
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl font-bold text-white mb-6 futuristic-font neon-glow">PREMIUM PLATFORMS</h1>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">Choose from our extensive collection of premium streaming and entertainment platforms</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Netflix -->
+                    <div class="dark-card rounded-xl p-8 card-hover cursor-pointer platform-card" data-platform="Netflix" data-price="25000">
+                        <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center mb-6 mx-auto red-glow">
+                            <span class="text-white text-3xl font-bold futuristic-font">N</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-center mb-3 text-white futuristic-font">NETFLIX PREMIUM</h3>
+                        <p class="text-gray-400 text-center mb-6">4K Ultra HD, 4 Screens, Download</p>
+                        <div class="text-center mb-6">
+                            <span class="text-3xl font-bold text-red-400 futuristic-font neon-glow">Rp 25.000</span>
+                            <span class="text-gray-500 block text-sm futuristic-font">/month</span>
+                        </div>
+                        <button class="w-full bg-gradient-to-r from-red-700 to-red-900 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-red-800 transition duration-300 futuristic-font" onclick="selectPlatform('Netflix', '25000')">
+                            SELECT PLAN
+                        </button>
+                    </div>
+
+                    <!-- Spotify -->
+                    <div class="dark-card rounded-xl p-8 card-hover cursor-pointer platform-card" data-platform="Spotify Premium" data-price="15000">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center mb-6 mx-auto red-glow">
+                            <span class="text-white text-3xl">♪</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-center mb-3 text-white futuristic-font">SPOTIFY PREMIUM</h3>
+                        <p class="text-gray-400 text-center mb-6">No Ads, Offline Mode, High Quality</p>
+                        <div class="text-center mb-6">
+                            <span class="text-3xl font-bold text-red-400 futuristic-font neon-glow">Rp 15.000</span>
+                            <span class="text-gray-500 block text-sm futuristic-font">/month</span>
+                        </div>
+                        <button class="w-full bg-gradient-to-r from-red-700 to-red-900 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-red-800 transition duration-300 futuristic-font" onclick="selectPlatform('Spotify Premium', '15000')">
+                            SELECT PLAN
+                        </button>
+                    </div>
+
+                    <!-- Disney+ -->
+                    <div class="dark-card rounded-xl p-8 card-hover cursor-pointer platform-card" data-platform="Disney+ Hotstar" data-price="30000">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center mb-6 mx-auto red-glow">
+                            <span class="text-white text-3xl">🏰</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-center mb-3 text-white futuristic-font">DISNEY+ HOTSTAR</h3>
+                        <p class="text-gray-400 text-center mb-6">All Content, 4K Quality, Multiple Devices</p>
+                        <div class="text-center mb-6">
+                            <span class="text-3xl font-bold text-red-400 futuristic-font neon-glow">Rp 30.000</span>
+                            <span class="text-gray-500 block text-sm futuristic-font">/month</span>
+                        </div>
+                        <button class="w-full bg-gradient-to-r from-red-700 to-red-900 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-red-800 transition duration-300 futuristic-font" onclick="selectPlatform('Disney+ Hotstar', '30000')">
+                            SELECT PLAN
+                        </button>
+                    </div>
+
+                    <!-- YouTube Premium -->
+                    <div class="dark-card rounded-xl p-8 card-hover cursor-pointer platform-card" data-platform="YouTube Premium" data-price="20000">
+                        <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center mb-6 mx-auto red-glow">
+                            <span class="text-white text-3xl">▶</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-center mb-3 text-white futuristic-font">YOUTUBE PREMIUM</h3>
+                        <p class="text-gray-400 text-center mb-6">No Ads, Background Play, YouTube Music</p>
+                        <div class="text-center mb-6">
+                            <span class="text-3xl font-bold text-red-400 futuristic-font neon-glow">Rp 20.000</span>
+                            <span class="text-gray-500 block text-sm futuristic-font">/month</span>
+                        </div>
+                        <button class="w-full bg-gradient-to-r from-red-700 to-red-900 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-red-800 transition duration-300 futuristic-font" onclick="selectPlatform('YouTube Premium', '20000')">
+                            SELECT PLAN
+                        </button>
+                    </div>
+
+                    <!-- Amazon Prime -->
+                    <div class="dark-card rounded-xl p-8 card-hover cursor-pointer platform-card" data-platform="Amazon Prime" data-price="22000">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg flex items-center justify-center mb-6 mx-auto red-glow">
+                            <span class="text-white text-3xl">📦</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-center mb-3 text-white futuristic-font">AMAZON PRIME</h3>
+                        <p class="text-gray-400 text-center mb-6">Prime Video, Music, Free Shipping</p>
+                        <div class="text-center mb-6">
+                            <span class="text-3xl font-bold text-red-400 futuristic-font neon-glow">Rp 22.000</span>
+                            <span class="text-gray-500 block text-sm futuristic-font">/month</span>
+                        </div>
+                        <button class="w-full bg-gradient-to-r from-red-700 to-red-900 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-red-800 transition duration-300 futuristic-font" onclick="selectPlatform('Amazon Prime', '22000')">
+                            SELECT PLAN
+                        </button>
+                    </div>
+
+                    <!-- HBO Max -->
+                    <div class="dark-card rounded-xl p-8 card-hover cursor-pointer platform-card" data-platform="HBO Max" data-price="28000">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg flex items-center justify-center mb-6 mx-auto red-glow">
+                            <span class="text-white text-3xl">🎬</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-center mb-3 text-white futuristic-font">HBO MAX</h3>
+                        <p class="text-gray-400 text-center mb-6">Exclusive Content, 4K, Multiple Profiles</p>
+                        <div class="text-center mb-6">
+                            <span class="text-3xl font-bold text-red-400 futuristic-font neon-glow">Rp 28.000</span>
+                            <span class="text-gray-500 block text-sm futuristic-font">/month</span>
+                        </div>
+                        <button class="w-full bg-gradient-to-r from-red-700 to-red-900 text-white py-3 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-red-800 transition duration-300 futuristic-font" onclick="selectPlatform('HBO Max', '28000')">
+                            SELECT PLAN
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ORDER PAGE -->
+    <div id="order" class="page">
+        <section class="pt-24 pb-20 bg-transparent bg-animated">
+            <div class="container mx-auto px-4 stagger-animation">
+                <div class="max-w-3xl mx-auto">
+                    <div class="dark-card rounded-2xl shadow-2xl p-10 border border-red-600 red-glow">
+                        <div class="text-center mb-10">
+                            <h1 class="text-4xl font-bold text-white mb-4 futuristic-font neon-glow">ORDER FORM</h1>
+                            <p class="text-gray-400 text-lg">Complete your order details for premium access</p>
+                        </div>
+
+                        <form id="orderForm" class="space-y-6">
+                            <!-- Platform Selection -->
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-3 futuristic-font">SELECTED PLATFORM</label>
+                                <select id="platform" name="platform" required class="w-full px-4 py-4 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font">
+                                    <option value="">Choose Platform</option>
+                                    <option value="Netflix" data-price="25000">Netflix Premium - Rp 25.000/month</option>
+                                    <option value="Spotify Premium" data-price="15000">Spotify Premium - Rp 15.000/month</option>
+                                    <option value="Disney+ Hotstar" data-price="30000">Disney+ Hotstar - Rp 30.000/month</option>
+                                    <option value="YouTube Premium" data-price="20000">YouTube Premium - Rp 20.000/month</option>
+                                    <option value="Amazon Prime" data-price="22000">Amazon Prime - Rp 22.000/month</option>
+                                    <option value="HBO Max" data-price="28000">HBO Max - Rp 28.000/month</option>
+                                </select>
+                            </div>
+
+                            <!-- Duration -->
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-3 futuristic-font">SUBSCRIPTION DURATION</label>
+                                <select id="duration" name="duration" required class="w-full px-4 py-4 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font">
+                                    <option value="">Choose Duration</option>
+                                    <option value="1" data-multiplier="1">1 Month</option>
+                                    <option value="3" data-multiplier="3">3 Months (5% Discount)</option>
+                                    <option value="6" data-multiplier="6">6 Months (10% Discount)</option>
+                                    <option value="12" data-multiplier="12">12 Months (15% Discount)</option>
+                                </select>
+                            </div>
+
+                            <!-- Personal Information -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-red-400 mb-3 futuristic-font">FULL NAME</label>
+                                    <input type="text" id="fullName" name="fullName" required class="w-full px-4 py-4 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font" placeholder="Enter your full name">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-red-400 mb-3 futuristic-font">WHATSAPP NUMBER</label>
+                                    <input type="tel" id="whatsapp" name="whatsapp" required class="w-full px-4 py-4 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font" placeholder="08xxxxxxxxxx">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-3 futuristic-font">EMAIL ADDRESS</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-4 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font" placeholder="email@example.com">
+                            </div>
+
+                            <!-- Account Type -->
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-3 futuristic-font">ACCOUNT TYPE</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <label class="flex items-center p-6 dark-card rounded-lg cursor-pointer hover:border-red-500 transition-all duration-300">
+                                        <input type="radio" name="accountType" value="shared" class="mr-4 text-red-500" required>
+                                        <div>
+                                            <div class="font-medium text-white futuristic-font">SHARED ACCOUNT</div>
+                                            <div class="text-sm text-gray-400">Share with other users</div>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center p-6 dark-card rounded-lg cursor-pointer hover:border-red-500 transition-all duration-300">
+                                        <input type="radio" name="accountType" value="private" class="mr-4 text-red-500" required>
+                                        <div>
+                                            <div class="font-medium text-white futuristic-font">PRIVATE ACCOUNT</div>
+                                            <div class="text-sm text-gray-400">Personal account (+50%)</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-3 futuristic-font">PAYMENT METHOD</label>
+                                <select id="paymentMethod" name="paymentMethod" required class="w-full px-4 py-4 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font">
+                                    <option value="">Choose Payment Method</option>
+                                    <option value="dana">DANA</option>
+                                    <option value="gopay">GoPay</option>
+                                    <option value="ovo">OVO</option>
+                                    <option value="shopeepay">ShopeePay</option>
+                                    <option value="bca">BCA Transfer</option>
+                                    <option value="mandiri">Mandiri Transfer</option>
+                                    <option value="bri">BRI Transfer</option>
+                                </select>
+                            </div>
+
+                            <!-- Notes -->
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-3 futuristic-font">ADDITIONAL NOTES (OPTIONAL)</label>
+                                <textarea id="notes" name="notes" rows="4" class="w-full px-4 py-4 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font" placeholder="Add any special requests..."></textarea>
+                            </div>
+
+                            <!-- Price Summary -->
+                            <div class="dark-card rounded-lg p-8 border border-red-600 red-glow">
+                                <h4 class="font-semibold text-white mb-6 text-xl futuristic-font neon-glow">ORDER SUMMARY</h4>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between text-gray-300">
+                                        <span class="futuristic-font">Platform:</span>
+                                        <span id="selectedPlatform" class="text-red-400 futuristic-font">-</span>
+                                    </div>
+                                    <div class="flex justify-between text-gray-300">
+                                        <span class="futuristic-font">Duration:</span>
+                                        <span id="selectedDuration" class="text-red-400 futuristic-font">-</span>
+                                    </div>
+                                    <div class="flex justify-between text-gray-300">
+                                        <span class="futuristic-font">Account Type:</span>
+                                        <span id="selectedAccountType" class="text-red-400 futuristic-font">-</span>
+                                    </div>
+                                    <div class="flex justify-between text-gray-300">
+                                        <span class="futuristic-font">Subtotal:</span>
+                                        <span id="subtotal" class="text-white futuristic-font">Rp 0</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm text-green-400">
+                                        <span class="futuristic-font">Discount:</span>
+                                        <span id="discount" class="futuristic-font">Rp 0</span>
+                                    </div>
+                                    <hr class="my-4 border-red-600">
+                                    <div class="flex justify-between font-bold text-xl">
+                                        <span class="text-white futuristic-font">TOTAL:</span>
+                                        <span id="totalPrice" class="text-red-400 futuristic-font neon-glow">Rp 0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-red-700 to-red-900 text-white py-6 px-8 rounded-lg font-semibold text-xl hover:from-red-600 hover:to-red-800 transition duration-300 transform hover:scale-105 futuristic-font neon-glow red-glow border border-red-600">
+                                📊 SUBMIT TO GOOGLE SHEETS
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <section class="pt-24 pb-20 bg-transparent bg-animated">
+            <div class="container mx-auto px-4 stagger-animation">
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl font-bold text-white mb-6 futuristic-font neon-glow">CONTACT US</h1>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">Get in touch with our team for any inquiries or support</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Contact Form -->
+                    <div class="dark-card rounded-2xl p-8 border border-red-600 red-glow">
+                        <h2 class="text-2xl font-bold text-white mb-6 futuristic-font">SEND MESSAGE</h2>
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-2 futuristic-font">NAME</label>
+                                <input type="text" required class="w-full px-4 py-3 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-2 futuristic-font">EMAIL</label>
+                                <input type="email" required class="w-full px-4 py-3 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font" placeholder="your@email.com">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-2 futuristic-font">SUBJECT</label>
+                                <input type="text" required class="w-full px-4 py-3 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font" placeholder="Message subject">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-red-400 mb-2 futuristic-font">MESSAGE</label>
+                                <textarea rows="5" required class="w-full px-4 py-3 dark-input rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent futuristic-font" placeholder="Your message..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-red-700 to-red-900 text-white py-4 px-6 rounded-lg font-semibold hover:from-red-600 hover:to-red-800 transition duration-300 futuristic-font">
+                                SEND MESSAGE
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="space-y-8">
+                        <div class="dark-card rounded-xl p-6 border border-red-600">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center red-glow">
+                                    <span class="text-xl">📧</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white futuristic-font">EMAIL</h3>
+                                    <p class="text-gray-400">JYRSTORE@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dark-card rounded-xl p-6 border border-red-600">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center red-glow">
+                                    <span class="text-xl">📱</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white futuristic-font">WHATSAPP</h3>
+                                    <p class="text-gray-400">+62 823-9657-9340</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dark-card rounded-xl p-6 border border-red-600">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center red-glow">
+                                    <span class="text-xl">🕒</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white futuristic-font">BUSINESS HOURS</h3>
+                                    <p class="text-gray-400">24/7 Available</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dark-card rounded-xl p-6 border border-red-600">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center red-glow">
+                                    <span class="text-xl">📍</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white futuristic-font">ADDRESS</h3>
+                                    <p class="text-gray-400">Jalan Abubakar Lambogo No 54, Makassar 90114</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SUPPORT PAGE -->
+    <div id="support" class="page">
+        <section class="pt-24 pb-20 bg-transparent bg-animated">
+            <div class="container mx-auto px-4 stagger-animation">
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl font-bold text-white mb-6 futuristic-font neon-glow">CUSTOMER SUPPORT</h1>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">24/7 support for all your premium account needs</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto">
+                    <!-- FAQ -->
+                    <div class="dark-card rounded-2xl p-8 border border-red-600 red-glow">
+                        <h2 class="text-2xl font-bold text-white mb-6 futuristic-font">FREQUENTLY ASKED QUESTIONS</h2>
+                        
+                        <div class="space-y-4">
+                            <div class="faq-item">
+                                <button class="faq-question w-full text-left py-4 text-white font-semibold futuristic-font hover:text-red-400 transition-colors" onclick="toggleFAQ(0)">
+                                    How long does delivery take?
+                                </button>
+                                <div class="faq-content text-gray-400 pb-4">
+                                    Premium accounts are delivered within 1 hour after payment confirmation. You'll receive login details via WhatsApp.
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question w-full text-left py-4 text-white font-semibold futuristic-font hover:text-red-400 transition-colors" onclick="toggleFAQ(1)">
+                                    What if my account stops working?
+                                </button>
+                                <div class="faq-content text-gray-400 pb-4">
+                                    We provide 30-day warranty. If your account stops working, contact us immediately for free replacement or full refund.
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question w-full text-left py-4 text-white font-semibold futuristic-font hover:text-red-400 transition-colors" onclick="toggleFAQ(2)">
+                                    Can I change my subscription plan?
+                                </button>
+                                <div class="faq-content text-gray-400 pb-4">
+                                    Yes, you can upgrade or change your plan anytime. Contact our support team for assistance with plan changes.
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question w-full text-left py-4 text-white font-semibold futuristic-font hover:text-red-400 transition-colors" onclick="toggleFAQ(3)">
+                                    Is my payment secure?
+                                </button>
+                                <div class="faq-content text-gray-400 pb-4">
+                                    Absolutely! We use encrypted payment methods and never store your financial information. All transactions are secure.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-transparent text-white py-12 relative z-10 border-t border-red-600">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center red-glow">
+                            <span class="text-xl">🔥</span>
+                        </div>
+                        <span class="text-xl font-bold futuristic-font neon-glow">JYR PREMIUM STORE</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">JYR - Your trusted premium account provider since 2020</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 futuristic-font text-red-400">QUICK LINKS</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-red-400 transition-colors" onclick="navigateToPage('home')">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-red-400 transition-colors" onclick="navigateToPage('products')">Products</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-red-400 transition-colors" onclick="navigateToPage('order')">Order</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-red-400 transition-colors" onclick="navigateToPage('support')">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 futuristic-font text-red-400">PLATFORMS</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Netflix Premium</li>
+                        <li>Spotify Premium</li>
+                        <li>Disney+ Hotstar</li>
+                        <li>YouTube Premium</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 futuristic-font text-red-400">CONTACT</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>📧 JYRSTORE@gmail.com</li>
+                        <li>📱 +62 823-9657-9340</li>
+                        <li>🌐 24/7 Online Support</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-red-600 mt-8 pt-8 text-center">
+                <p class="text-gray-500 futuristic-font">© 2024 JYR PREMIUM STORE - ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced Navigation with Smooth Transitions
+        let isTransitioning = false;
+        
+        function navigateToPage(pageName) {
+            if (isTransitioning) return;
+            
+            const currentPage = document.querySelector('.page.active');
+            const targetPage = document.getElementById(pageName);
+            
+            if (currentPage === targetPage) return;
+            
+            isTransitioning = true;
+            
+            // Show transition overlay
+            const transition = document.getElementById('pageTransition');
+            const transitionText = document.getElementById('transitionText');
+            
+            // Set transition text based on page
+            const pageTexts = {
+                'home': 'LOADING HOME...',
+                'products': 'LOADING PRODUCTS...',
+                'order': 'LOADING ORDER FORM...',
+                'contact': 'LOADING CONTACT...',
+                'support': 'LOADING SUPPORT...'
+            };
+            
+            transitionText.textContent = pageTexts[pageName] || 'LOADING...';
+            transition.classList.add('active');
+            
+            // Close mobile menu
+            document.getElementById('mobile-menu').classList.remove('open');
+            
+            setTimeout(() => {
+                // Hide current page
+                if (currentPage) {
+                    currentPage.classList.remove('active');
+                    currentPage.classList.add('slide-out-left');
+                }
+                
+                // Show target page
+                targetPage.classList.remove('slide-in-right');
+                targetPage.classList.add('active');
+                
+                // Update navigation active state
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                document.querySelectorAll(`[data-page="${pageName}"]`).forEach(link => {
+                    link.classList.add('active');
+                });
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // Trigger stagger animation for new page content
+                const staggerElements = targetPage.querySelectorAll('.stagger-animation');
+                staggerElements.forEach(element => {
+                    element.style.animation = 'none';
+                    element.offsetHeight; // Trigger reflow
+                    element.style.animation = null;
+                    
+                    const children = element.children;
+                    Array.from(children).forEach((child, index) => {
+                        child.style.animation = 'none';
+                        child.offsetHeight; // Trigger reflow
+                        child.style.animation = `staggerIn 0.6s ease-out forwards`;
+                        child.style.animationDelay = `${(index + 1) * 0.1}s`;
+                    });
+                });
+                
+                // Re-animate counters if on home page
+                if (pageName === 'home') {
+                    setTimeout(() => {
+                        animateCounters();
+                    }, 300);
+                }
+                
+                setTimeout(() => {
+                    // Hide transition overlay
+                    transition.classList.remove('active');
+                    
+                    // Clean up classes
+                    if (currentPage) {
+                        currentPage.classList.remove('slide-out-left');
+                    }
+                    
+                    isTransitioning = false;
+                }, 500);
+                
+            }, 300);
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        });
+
+        // Navigation event listeners
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                navigateToPage(page);
+            });
+        });
+
+        // Platform selection
+        function selectPlatform(platform, price) {
+            navigateToPage('order');
+            setTimeout(() => {
+                document.getElementById('platform').value = platform;
+                updateOrderSummary();
+            }, 100);
+        }
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 20);
+            });
+        }
+
+        // Testimonial slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-slide');
+        
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            const track = document.getElementById('testimonial-track');
+            track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+        }
+
+        // Auto-slide testimonials
+        setInterval(nextTestimonial, 4000);
+
+        // Order form functionality
+        const platformSelect = document.getElementById('platform');
+        const durationSelect = document.getElementById('duration');
+        const accountTypeRadios = document.querySelectorAll('input[name="accountType"]');
+        
+        function updateOrderSummary() {
+            const platform = platformSelect.value;
+            const platformOption = platformSelect.options[platformSelect.selectedIndex];
+            const basePrice = platformOption.dataset.price ? parseInt(platformOption.dataset.price) : 0;
+            
+            const duration = durationSelect.value;
+            const durationOption = durationSelect.options[durationSelect.selectedIndex];
+            const multiplier = durationOption.dataset.multiplier ? parseInt(durationOption.dataset.multiplier) : 1;
+            
+            const accountType = document.querySelector('input[name="accountType"]:checked');
+            const isPrivate = accountType && accountType.value === 'private';
+            
+            let subtotal = basePrice * multiplier;
+            if (isPrivate) {
+                subtotal = subtotal * 1.5;
+            }
+            
+            let discountPercent = 0;
+            if (multiplier === 3) discountPercent = 5;
+            else if (multiplier === 6) discountPercent = 10;
+            else if (multiplier === 12) discountPercent = 15;
+            
+            const discountAmount = subtotal * (discountPercent / 100);
+            const total = subtotal - discountAmount;
+            
+            document.getElementById('selectedPlatform').textContent = platform || '-';
+            document.getElementById('selectedDuration').textContent = duration ? `${duration} Month${duration > 1 ? 's' : ''}` : '-';
+            document.getElementById('selectedAccountType').textContent = accountType ? (isPrivate ? 'Private' : 'Shared') : '-';
+            document.getElementById('subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            document.getElementById('discount').textContent = discountAmount > 0 ? `-Rp ${discountAmount.toLocaleString('id-ID')}` : 'Rp 0';
+            document.getElementById('totalPrice').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        // Event listeners for order form
+        if (platformSelect) {
+            platformSelect.addEventListener('change', updateOrderSummary);
+            durationSelect.addEventListener('change', updateOrderSummary);
+            accountTypeRadios.forEach(radio => {
+                radio.addEventListener('change', updateOrderSummary);
+            });
+        }
+
+        // Google Sheets Integration
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyXWHTD8_Vg0BjJfIu1fgu3DCRCCRMTnedn4wdgbLBZtHtveq0f-C4qvSVTnekTHA9K/exec';
+        
+        async function submitToGoogleSheets(data, type) {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        type: type,
+                        data: data,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                return true;
+            } catch (error) {
+                console.error('Error submitting to Google Sheets:', error);
+                return false;
+            }
+        }
+
+        // Order Form Submission
+        document.getElementById('orderForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<div class="loading"></div> SUBMITTING...';
+            submitBtn.disabled = true;
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const orderData = {
+                platform: formData.get('platform'),
+                duration: formData.get('duration'),
+                fullName: formData.get('fullName'),
+                whatsapp: formData.get('whatsapp'),
+                email: formData.get('email'),
+                accountType: formData.get('accountType'),
+                paymentMethod: formData.get('paymentMethod'),
+                notes: formData.get('notes'),
+                totalPrice: document.getElementById('totalPrice').textContent,
+                orderDate: new Date().toLocaleDateString('id-ID'),
+                orderTime: new Date().toLocaleTimeString('id-ID')
+            };
+            
+            const success = await submitToGoogleSheets(orderData, 'order');
+            
+            setTimeout(() => {
+                if (success) {
+                    showSuccessPopup('Order berhasil! Data Anda telah tercatat dan akan segera diproses oleh tim kami.');
+                    this.reset();
+                    updateOrderSummary();
+                } else {
+                    showErrorPopup('Terjadi kesalahan saat menyimpan data. Silakan coba lagi atau hubungi customer service.');
+                }
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+
+        // Contact Form Submission
+        document.getElementById('contactForm')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<div class="loading"></div> SENDING...';
+            submitBtn.disabled = true;
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const contactData = {
+                name: formData.get('name') || this.querySelector('input[type="text"]').value,
+                email: formData.get('email') || this.querySelector('input[type="email"]').value,
+                subject: formData.get('subject') || this.querySelector('input[placeholder*="subject"]').value,
+                message: formData.get('message') || this.querySelector('textarea').value,
+                contactDate: new Date().toLocaleDateString('id-ID'),
+                contactTime: new Date().toLocaleTimeString('id-ID')
+            };
+            
+            const success = await submitToGoogleSheets(contactData, 'contact');
+            
+            setTimeout(() => {
+                if (success) {
+                    showSuccessPopup('Pesan berhasil! Terima kasih atas pesan Anda. Tim kami akan segera merespons.');
+                    this.reset();
+                } else {
+                    showErrorPopup('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi atau hubungi kami melalui WhatsApp.');
+                }
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+
+
+
+        // FAQ functionality
+        function toggleFAQ(index) {
+            const faqItems = document.querySelectorAll('.faq-content');
+            const faqItem = faqItems[index];
+            
+            faqItems.forEach((item, i) => {
+                if (i !== index) {
+                    item.classList.remove('open');
+                }
+            });
+            
+            faqItem.classList.toggle('open');
+        }
+
+
+
+        // Pop-up functions
+        function showSuccessPopup(message) {
+            document.getElementById('popupMessage').textContent = message;
+            document.getElementById('successPopup').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function showErrorPopup(message) {
+            document.getElementById('errorPopupMessage').textContent = message;
+            document.getElementById('errorPopup').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closePopup() {
+            document.getElementById('successPopup').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function closeErrorPopup() {
+            document.getElementById('errorPopup').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close popup when clicking outside
+        document.getElementById('successPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+        
+        document.getElementById('errorPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeErrorPopup();
+            }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopup();
+                closeErrorPopup();
+            }
+        });
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Matrix Rain Effect
+        function createMatrixRain() {
+            const matrixContainer = document.getElementById('matrixRain');
+            const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}|;:,.<>?';
+            
+            function createColumn() {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = Math.random() * 100 + '%';
+                column.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                
+                let text = '';
+                const length = Math.floor(Math.random() * 10) + 5;
+                for (let i = 0; i < length; i++) {
+                    text += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
+                }
+                column.innerHTML = text;
+                
+                matrixContainer.appendChild(column);
+                
+                setTimeout(() => {
+                    if (column.parentNode) {
+                        column.parentNode.removeChild(column);
+                    }
+                }, 5000);
+            }
+            
+            // Create initial columns
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createColumn, i * 200);
+            }
+            
+            // Continue creating columns
+            setInterval(createColumn, 300);
+        }
+
+        // Parallax Effect for Background Elements
+        function initParallax() {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                
+                document.querySelectorAll('.particle').forEach((particle, index) => {
+                    const speed = (index + 1) * 0.1;
+                    particle.style.transform = `translateY(${rate * speed}px)`;
+                });
+                
+                document.querySelectorAll('.energy-wave').forEach((wave, index) => {
+                    const speed = (index + 1) * 0.2;
+                    wave.style.transform = `translateY(${rate * speed}px)`;
+                });
+            });
+        }
+
+        // Dynamic Particle Generation
+        function createDynamicParticles() {
+            const container = document.querySelector('.fixed.inset-0');
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = '100%';
+                particle.style.background = `rgba(220, 20, 60, ${Math.random() * 0.8 + 0.2})`;
+                particle.style.animation = `float${Math.floor(Math.random() * 7) + 1} ${Math.random() * 10 + 10}s infinite linear`;
+                
+                container.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 25000);
+            }, 2000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            animateCounters();
+            updateOrderSummary();
+            createMatrixRain();
+            initParallax();
+            createDynamicParticles();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'985db73784def8fa',t:'MTc1OTAwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
